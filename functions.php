@@ -45,6 +45,15 @@ update_option('woocommerce_thumbnail_image_height', 90);
 update_option('woocommerce_thumbnail_image_crop', 1);
 
 /**
+* Remove editor from Appearance menu 09242014
+* @author Justin Hedani
+*/
+function remove_editor_menu() {
+  remove_action('admin_menu', '_add_themes_utility_last', 101);
+}
+add_action('_admin_menu', 'remove_editor_menu', 1);
+
+/**
  * Add "Featured Image" upload field to posts 09142014
  * @author Justin Hedani
  */
