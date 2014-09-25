@@ -3,7 +3,7 @@
 /*
 	@package WordPress
 	@subpackage The Cause
-	
+
 	Template Name: Events
 */
 
@@ -20,23 +20,23 @@ $title = $post->post_title;
 	<div>
 
     <?php get_sidebar('events'); ?>
-	
+
     <!-- INNER content -->
-    <div id="inner">   
+    <div id="inner">
 
 	<?php
-	
-	$timezone = get_option('timezone_string');
 
+	$timezone = get_option('timezone_string');
+	error_log($timezone);
 	date_default_timezone_set(get_option('timezone_string'));
-	
+
 	$todayArray = getdate();
 	$today = $todayArray['year'] . '-';
 	$today .= str_pad($todayArray['mon'], 2, 0, STR_PAD_LEFT) . '-';
 	$today .= str_pad($todayArray['mday'], 2, 0, STR_PAD_LEFT);
-	
+
 	$args = array();
-	
+
 	$args['post_type'] = 'event';
 	$args['post_status'] = 'publish';
 	$args['order'] = 'ASC';
@@ -57,15 +57,15 @@ $title = $post->post_title;
 	} else {
 		$paged = 1;
 	}
-	
-	$args['paged'] = $paged; 
-	
+
+	$args['paged'] = $paged;
+
 	$tbQuery = new WP_Query($args);
-	
+
 	?>
 
     <?php if ($tbQuery->have_posts()) : while ($tbQuery->have_posts()) : $tbQuery->the_post(); ?>
-	
+
 		<?php $postID = get_the_ID(); $permalink = get_permalink($postID); $postTitle = get_the_title(); ?>
 
 		<?php
@@ -74,7 +74,7 @@ $title = $post->post_title;
 		$startDateArray = tb_get_date($startDate);
 		?>
 
-	
+
         <div class="eventHolder">
 			<div class="eventFrame">
 				<div>
@@ -83,42 +83,42 @@ $title = $post->post_title;
 					$imageThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id($postID), 'campaign');
 					echo $imageThumbnail[0]; ?>');"></span>
 				<span class="paperClip"></span>
-				
+
 				<div>
-				
+
 				<strong><?php echo $startDateArray['day']; ?></strong><br>
 				<?php echo $startDateArray['monthshort']; ?>
-				
+
 				</div>
 				</div>
 			</div>
-			
+
 			<h3>
 				<a href="<?php echo $permalink; ?>" title="<?php echo $postTitle; ?>"><?php echo $postTitle; ?></a>
 				<strong>
-				(<?php echo $startDateArray['monthname'] . ' ' . $startDateArray['day'] . $startDateArray['sufix'] . ', ' . $startDateArray['year']; ?> at <?php echo date("g:ia", strtotime($postMeta['_time'][0])); ?>)				
+				(<?php echo $startDateArray['monthname'] . ' ' . $startDateArray['day'] . $startDateArray['sufix'] . ', ' . $startDateArray['year']; ?> at <?php echo date("g:ia", strtotime($postMeta['_time'][0])); ?>)
 				</strong>
 			</h3>
-			
+
 			<p class="newsInfo"><?php if ($postMeta['_location'][0]) echo 'Location: ' . $postMeta['_location'][0]; ?></p>
-						
+
 			<?php the_excerpt(); ?>
-			
+
 			<a class="tinyButton roundButton alignright" href="<?php echo $permalink; ?>" title="<?php echo $postTitle; ?>">read more</a>
-			
+
 			<div class="horDashed"></div>
         </div>
-    
+
     <?php endwhile; endif; ?>
-    
+
     <?php wp_reset_postdata(); ?>
-		
+
 	<?php kriesi_pagination($tbQuery->max_num_pages); ?>
 
     </div>
-	
+
 	</div>
-	
+
 	</div>
 
 <?php

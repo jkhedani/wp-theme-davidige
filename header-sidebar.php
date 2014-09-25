@@ -26,6 +26,16 @@
 
 <?php wp_head(); ?>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-55112199-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </head>
 
 <body <?php body_class(); ?>>
@@ -35,9 +45,9 @@
 <!-- HEADER -->
 <div id="header" class="width100" <?php tb_write_bckg(); ?>>
     <div class="width1000">
-        
+
         <div id="logo"><h1><a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>"><img src="<?php echo tb_get_logo(); ?>" alt="<?php bloginfo('name'); ?>"></a></h1></div>
-		
+
     </div>
 </div>
 <!-- .HEADER -->
@@ -46,19 +56,19 @@
 
 <!-- CONTENT -->
 <div id="contentHolder" class="width100">
-    
+
 	<!-- Navigation -->
     <div id="navigationBckg" class="<?php tb_write_bckg('navigation'); ?> width100">
-		
+
         <div id="navigation">
-		
+
 		<div class="width1000">
 		<?php
 			if (has_nav_menu('Navigation')) {
 		        wp_nav_menu(
 		            array(
-		                'theme_location' => 'Navigation', 
-		                'container' => false, 
+		                'theme_location' => 'Navigation',
+		                'container' => false,
 		                'menu_class' => 'navigation',
 		                'fallback_cb' => 'tb_default_navigation'
 		            )
@@ -68,15 +78,15 @@
 			}
 	    ?>
         </div>
-		
+
         </div>
-		
+
     </div>
 	<!-- .Navigation -->
-        
+
     <!-- MAIN -->
     <div id="main" class="width100">
-	
+
 		<?php
 		global $post;
 		$postID = $post->ID;
@@ -88,12 +98,12 @@
 				break;
 			}
 		}
-		
-		$mainShadow = get_post_meta($postID, '_main_shadow', true);		
+
+		$mainShadow = get_post_meta($postID, '_main_shadow', true);
 		$sidebarPosition = get_post_meta($postID, '_sidebar_position', true);
 		$mainImageArray = tb_get_main_image($mainImage, $mainShadow);
 		?>
-	
+
 		<!-- Promo Image -->
 		<div id="promoImage" class="width100">
 			<?php if ($mainImageArray['mainImage']) { ?>
@@ -105,7 +115,7 @@
 		</div>
 		<!-- .Promo Image -->
 
-    
+
         <!-- Content -->
         <div id="content" class="<?php tb_write_bckg('buttons'); ?> <?php tb_write_bckg('buttonsExtra'); ?>  <?php tb_write_bckg('sidebar'); ?> <?php echo tb_get_sidebar_position($sidebarPosition); ?> width1000" <?php if (!$mainImageArray['mainImage']) echo ' style="margin-top: 0 !important;"'; ?>>
 		<div class="sidebarHolder">
