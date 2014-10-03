@@ -1,4 +1,4 @@
-/*	
+/*
 Theme Name: The Cause
 Theme URI: http://www.themeblossom.com/the-cause-idealist
 Description: The Cause is a clean and elegant non-profit Wordpress theme that can be used for a variety of purposes and causes.
@@ -185,8 +185,10 @@ h2 a, h3, h3 a, h4, h4 a, h5, h5 a, h6, h6 a {color: #004375;}
 /* 2.0 HEADER */
 #header {background-position: center top; background-repeat: repeat-x; position: relative; overflow: hidden; text-align: center;}
 
-#logo {margin: 17px auto; margin-bottom: 0 !important; overflow: hidden; position: relative; display: block;}
+#logo {margin: 0 auto; margin-bottom: 0 !important; overflow: hidden; position: relative; display: block;}
 #logo h1 {margin: 0 !important; padding: 0 !important; line-height: 0 !important;}
+#logo h1 a { display: block; }
+#logo h1 a img { width: 100%; height: auto; }
 
 /* 3.0 CONTENT */
 #contentHolder {position: relative; z-index: 2;}
